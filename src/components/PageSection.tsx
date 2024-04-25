@@ -9,6 +9,7 @@ type PageSectionProps = {
     children?: React.ReactNode,
     type?: PageSectionType,
     title?: string,
+    subtitle?: string
 }
 const PageSection: FC<PageSectionProps> = (props: PageSectionProps) => {
     //Determine Styling based on type
@@ -32,6 +33,8 @@ const PageSection: FC<PageSectionProps> = (props: PageSectionProps) => {
                 <h1 className="text-center text-5xl font-bold">
                     {props.title}
                 </h1>
+                <br/>
+                <h4 className="text-center text-xl font-semibold">{props.subtitle}</h4>
             </div>
             <br/>
             <br/>
