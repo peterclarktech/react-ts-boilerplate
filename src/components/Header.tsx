@@ -7,7 +7,7 @@ type HeaderProps = {
 }
 const HeaderBody: FC<HeaderProps> = (props: HeaderProps) => {
     return (
-        <header className="bg-green-700 sticky top-0 z-10">
+        <header className="bg-positive-dark sticky top-0 z-10">
             <nav className="flex flex-row mx-2 sm:mx-20 py-2 gap-x-10 sm:gap-x-8">
                 {props.children}
             </nav>
@@ -23,11 +23,10 @@ type HeaderLogoProps = {
     imgClass: string
 }
 const HeaderLogo: FC<HeaderLogoProps> = (props: HeaderLogoProps) => {
-    const hoverClass = props.linkto ? "hover:text-slate-50" : "";
     const innerDisp = (
         <div className="flex flex-row gap-2">
             <img src={props.imgSrc} alt={props.imgAlt} className={props.imgClass} />
-            <span className={`content-center text-slate-300 ${hoverClass} hidden lg:inline`}>{props.children}</span>
+            <span className={`content-center text-white text-opacity-75 font-extrabold hidden lg:inline`}>{props.children}</span>
         </div>
     );
 
@@ -52,7 +51,7 @@ type HeaderLinkProps = {
 const HeaderLink: FC<HeaderLinkProps> = (props: HeaderLinkProps) => {
     return (
         <span className="content-center">
-            <Link className="text-white hover:text-gray-300" to={props.to}>
+            <Link className="text-white hover:text-gray-light" to={props.to}>
                 <i className={props.iconClass}></i>
                 <span className="hidden sm:inline">
                     &nbsp;{props.children}

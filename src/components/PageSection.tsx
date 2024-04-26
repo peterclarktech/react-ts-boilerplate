@@ -18,17 +18,17 @@ const PageSection: FC<PageSectionProps> = (props: PageSectionProps) => {
     let textColorClass = "";
 
     if (props.type === PageSectionType.normal) {
-        bgColorClass = "bg-white";
-        titleColorClass = "text-green-900";
-        textColorClass = "text-black";
+        bgColorClass = "bg-white dark:bg-black";
+        titleColorClass = "text-positive-dark dark:text-positive-light";
+        textColorClass = "text-black dark:text-white";
     } else if (props.type === PageSectionType.dark) {
-        bgColorClass = "bg-slate-700";
-        titleColorClass = "text-slate-300";
+        bgColorClass = "bg-gray-dark";
+        titleColorClass = "text-gray";
         textColorClass = "text-white";
     }
 
     return (
-        <div className={`${bgColorClass} border-b-2 border-b-slate-300 py-14`}>
+        <div className={`${bgColorClass} border-b-2 border-b-gray-light py-14`}>
             <div className={`${titleColorClass}`}>
                 <h1 className="text-center text-5xl font-bold">
                     {props.title}
