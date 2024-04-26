@@ -1,9 +1,15 @@
+import { FC } from "react";
+import PageSection from "../components/PageSection";
 
-export default function ErrorPage() {
-    //TODO: make this error page better
+const ErrorPage: FC<{ title?:string, message?: string }> = ({ title, message }) => {
+    if (!title) title = "Error";
+    if (!message) message = "Something went wrong with your last action.";
     return (
         <>
-            <h1>AN ERROR HAS OCCURRED</h1>
+            <PageSection title={title} subtitle={message}>
+            </PageSection>
         </>
     )
 }
+
+export default ErrorPage;

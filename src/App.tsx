@@ -1,9 +1,6 @@
-import { useRoutes } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import reactlogo from './assets/react.svg'
 
-import HomePage from './pages/HomePage'
-import CrudSamplePage from './pages/CrudSamplePage';
-import AuthorPage from './pages/AuthorPage';
 
 import Header from './components/Header'
 import Footer from './components/Footer';
@@ -11,20 +8,6 @@ import Footer from './components/Footer';
 
 export default function App() {
   const year = new Date().getFullYear();
-  const element = useRoutes([
-    {
-      path: "/",
-      element: <HomePage />
-    },
-    {
-      path: "/crudsample",
-      element: <CrudSamplePage />
-    },
-    {
-      path: "/author",
-      element: <AuthorPage />
-    }
-  ]);
 
   return (
     <div className="flex flex-col min-h-svh">
@@ -35,7 +18,7 @@ export default function App() {
         <Header.HeaderLink to="/author" iconClass="bi bi-person-vcard">Author</Header.HeaderLink>
       </Header.HeaderBody>
       <main className="flex-1">
-        {element}
+        <Outlet/>
       </main>
       <Footer>
         <span>Company Name, Inc. &copy;{year}</span>

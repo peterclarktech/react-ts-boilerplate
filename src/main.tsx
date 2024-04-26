@@ -6,21 +6,15 @@ import '@fontsource-variable/dm-sans';
 // bootstrap icons import
 import "bootstrap-icons/font/bootstrap-icons.css"
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import ErrorPage from './pages/ErrorPage';
-import App from './App';
+import BaseRoute from './BaseRoute';
 
-const router = createBrowserRouter([
-  {
-    path: "*",
-    element: <App />,
-    errorElement: <ErrorPage/>
-  },
-]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <RouterProvider router={router}/>
+      <BrowserRouter>
+        <BaseRoute />
+      </BrowserRouter>
   </React.StrictMode>,
 )
