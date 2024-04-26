@@ -35,7 +35,7 @@ export default function HomePage() {
                                 <img src={viteLogo} className="p-6 h-56 hover:drop-shadow-xl-vite transition filter delay-100" alt="Vite logo"/>
                             </a>
                             <a href="https://react.dev" className="" target="_blank">
-                                <img src={reactLogo} className="p-6 h-56 hover:drop-shadow-xl-react animate-spin-slow" alt="React logo"/>
+                                <img src={reactLogo} className="p-6 h-56 hover:drop-shadow-xl-react animate-spin-slow transition filter delay-100" alt="React logo"/>
                             </a>
                         </div>
                     </div>
