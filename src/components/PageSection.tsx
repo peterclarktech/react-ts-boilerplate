@@ -10,7 +10,7 @@ type PageSectionProps = {
 const PageSection: FC<PageSectionProps> = ({type=ColorGroup.inherit,...props}) => {
     const pageSectionClasses = ColorSelect[type];
     return (
-        <div className={`${pageSectionClasses.bgColorClass} border-b-2 border-b-gray-light py-14`}>
+        <div className={`${pageSectionClasses.bgColorClass} border-b-2 border-b-gray py-14`}>
             <div className={`${pageSectionClasses.titleColorClass}`}>
                 <h1 className="text-center text-5xl font-bold">
                     {props.title}

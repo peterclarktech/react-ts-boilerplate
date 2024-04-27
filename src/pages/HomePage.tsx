@@ -18,8 +18,8 @@ export default function HomePage() {
         <>
             <PageSection title="Start Coding" 
                 subtitle="Hit the ground running with this React boilerplate project using Vite and Tailwind CSS." 
-                type={ColorGroup.normal}>
-                <Card image={{ src: "/coding-guy.png", alt: "start coding now!" }}>
+                type={ColorGroup.inherit}>
+                <Card colorGroup={ColorGroup.positive} image={{ src: "/coding-guy.png", alt: "start coding now!", width: 250 }}>
                     <div className="flex flex-col gap-5">
                         <p className="text-lg">
                             <span className="font-bold">React ({version})</span> lets you build user interfaces out of individual pieces called components. Create your own React components then combine them into entire screens, pages and apps.
