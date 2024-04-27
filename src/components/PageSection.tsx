@@ -1,35 +1,17 @@
 import { FC } from "react";
+import ColorGroup, { ColorSelect } from "../utils/ColorGroup";
 
-export enum PageSectionType {
-    inherit,
-    normal,
-    dark
-}
 type PageSectionProps = {
     children?: React.ReactNode,
-    type?: PageSectionType,
+    type?: ColorGroup,
     title?: string,
     subtitle?: string
 }
-const PageSection: FC<PageSectionProps> = (props: PageSectionProps) => {
-    //Determine Styling based on type
-    let bgColorClass = "";//default type will inherit parent styling
-    let titleColorClass = "";
-    let textColorClass = "";
-
-    if (props.type === PageSectionType.normal) {
-        bgColorClass = "bg-white dark:bg-black";
-        titleColorClass = "text-positive-dark dark:text-positive-light";
-        textColorClass = "text-black dark:text-white";
-    } else if (props.type === PageSectionType.dark) {
-        bgColorClass = "bg-gray-dark";
-        titleColorClass = "text-gray";
-        textColorClass = "text-white";
-    }
-
+const PageSection: FC<PageSectionProps> = ({type=ColorGroup.inherit,...props}) => {
+    const pageSectionClasses = ColorSelect[type];
     return (
-        <div className={`${bgColorClass} border-b-2 border-b-gray-light py-14`}>
-            <div className={`${titleColorClass}`}>
+        <div className={`${pageSectionClasses.bgColorClass} border-b-2 border-b-gray-light py-14`}>
+            <div className={`${pageSectionClasses.titleColorClass}`}>
                 <h1 className="text-center text-5xl font-bold">
                     {props.title}
                 </h1>
@@ -38,7 +20,7 @@ const PageSection: FC<PageSectionProps> = (props: PageSectionProps) => {
             </div>
             <br/>
             <br/>
-            <div className={`${textColorClass}`}>
+            <div className={`${pageSectionClasses.textColorClass}`}>
                 {props.children}
             </div>
         </div>

@@ -1,11 +1,12 @@
 import reactLogo from '../assets/react.svg'
 import viteLogo from '../../public/vite.svg'
 
-//import styles from './HomePage.module.css'
 import { useState, version } from 'react'
-import PageSection, { PageSectionType } from '../components/PageSection';
+import PageSection from '../components/PageSection';
 import Card from '../components/Card';
+
 import useDarkMode from '../hooks/useDarkMode';
+import ColorGroup from '../utils/ColorGroup';
 
 export default function HomePage() {
     const [count, setCount] = useState(0);
@@ -15,11 +16,13 @@ export default function HomePage() {
 
     return (
         <>
-            <PageSection title="Start Coding With React!" subtitle="Hit the ground running with this React boilerplate project using Vite and Tailwind CSS." type={PageSectionType.normal}>
-                <Card imgClass="" imgSrc="/coding-guy.png" imgAlt="start coding now!" imgWidth={400} imgHeight={400}>
-                    <div className="p-10 flex flex-col gap-5">
+            <PageSection title="Start Coding" 
+                subtitle="Hit the ground running with this React boilerplate project using Vite and Tailwind CSS." 
+                type={ColorGroup.normal}>
+                <Card image={{ src: "/coding-guy.png", alt: "start coding now!" }}>
+                    <div className="flex flex-col gap-5">
                         <p className="text-lg">
-                            <span className="font-bold">React ({version})</span> lets you build user interfaces out of individual pieces called components. Create your own React components then combine them into entire screen, pages and apps.
+                            <span className="font-bold">React ({version})</span> lets you build user interfaces out of individual pieces called components. Create your own React components then combine them into entire screens, pages and apps.
                         </p>
                         <p className="text-lg">
                             <span className="font-bold">Vite</span> provides many enhancements over native ESM imports to support various features that are typically seen in bundler-based setups.
@@ -30,7 +33,9 @@ export default function HomePage() {
                     </div>
                 </Card>
             </PageSection>
-            <PageSection title="Vite + React" subtitle="Click on the Vite and React logos to learn more" type={PageSectionType.dark}>
+            <PageSection title="Vite + React" 
+                subtitle="Click on the Vite and React logos to learn more" 
+                type={ColorGroup.dark}>
                 <div className="flex my-10">
                     <div className="mx-auto flex flex-row gap-10">
                         <a href="https://vitejs.dev" target="_blank">
@@ -52,17 +57,18 @@ export default function HomePage() {
                     </p>
                 </div>
             </PageSection>
-            <PageSection title="Tailwind CSS" subtitle="Rapidly build modern websites without ever leaving your HTML" type={PageSectionType.normal}>
+            <PageSection title="Tailwind CSS" 
+                subtitle="Rapidly build modern websites without ever leaving your HTML" 
+                type={ColorGroup.positive}>
                 <div className="flex my-10">
                     <div className="mx-auto flex flex-row">
                         <div>
                             Visit their official website to learn more &nbsp;
                         </div>
                         <a href="https://tailwindcss.com" target="_blank">
-                            <img src={tailwindsvgpath} width={200}/>
+                            <img src={tailwindsvgpath} width={200} />
                         </a>
                     </div>
-
                 </div>
             </PageSection>
         </>

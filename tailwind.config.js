@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{html,tsx,jsx}"],
+  content: ["./src/**/*.{html,tsx,jsx}", "./src/utils/*.{ts,js}"],
   theme: {
     colors: {
       'white': 'white',
@@ -11,9 +11,9 @@ export default {
       'positive': '#5DA955',
       'positive-light': '#7EBD77',
       'positive-dark': 'rgb(49 133 41)',
-      'negative': '#CB666B',
-      'negative-light': '#E38F93',
-      'negative-dark': '#AF3E44',
+      'danger': '#CB666B',
+      'danger-light': '#E38F93',
+      'danger-dark': '#AF3E44',
       'accent': '#A45382',
       'accent-light': '#B8749C',
       'accent-dark': '#8E3268'
