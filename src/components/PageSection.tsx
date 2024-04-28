@@ -3,11 +3,11 @@ import ColorGroup, { ColorSelect } from "../utils/ColorGroup";
 
 type PageSectionProps = {
     children?: React.ReactNode,
-    type?: ColorGroup,
+    colorGroup?: ColorGroup,
     title?: string,
     subtitle?: string
 }
-const PageSection: FC<PageSectionProps> = ({type=ColorGroup.inherit,...props}) => {
+const PageSection: FC<PageSectionProps> = ({colorGroup: type=ColorGroup.inherit,...props}) => {
     const pageSectionClasses = ColorSelect[type];
     return (
         <div className={`${pageSectionClasses.bgColorClass} border-b-2 border-b-gray py-14`}>

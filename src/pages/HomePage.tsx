@@ -18,7 +18,7 @@ export default function HomePage() {
         <>
             <PageSection title="Start Coding" 
                 subtitle="Hit the ground running with this React boilerplate project using Vite and Tailwind CSS." 
-                type={ColorGroup.inherit}>
+                colorGroup={ColorGroup.inherit}>
                 <Card colorGroup={ColorGroup.positive} image={{ src: "/coding-guy.png", alt: "start coding now!", width: 250 }}>
                     <div className="flex flex-col gap-5">
                         <p className="text-lg">
@@ -35,7 +35,7 @@ export default function HomePage() {
             </PageSection>
             <PageSection title="Vite + React" 
                 subtitle="Click on the Vite and React logos to learn more" 
-                type={ColorGroup.dark}>
+                colorGroup={ColorGroup.dark}>
                 <div className="flex my-10">
                     <div className="mx-auto flex flex-row gap-10">
                         <a href="https://vitejs.dev" target="_blank">
@@ -59,7 +59,7 @@ export default function HomePage() {
             </PageSection>
             <PageSection title="Tailwind CSS" 
                 subtitle="Rapidly build modern websites without ever leaving your HTML" 
-                type={ColorGroup.positive}>
+                colorGroup={ColorGroup.positive}>
                 <div className="flex my-10">
                     <div className="mx-auto flex flex-row">
                         <div>
