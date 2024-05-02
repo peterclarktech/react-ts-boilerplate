@@ -5,12 +5,14 @@ type PageSectionProps = {
     children?: React.ReactNode,
     colorGroup?: ColorGroup,
     title?: string,
-    subtitle?: string
+    subtitle?: string,
+    hasBottomBorder?: boolean
 }
-const PageSection: FC<PageSectionProps> = ({colorGroup: type=ColorGroup.inherit,...props}) => {
+const PageSection: FC<PageSectionProps> = ({colorGroup: type=ColorGroup.inherit,hasBottomBorder=true,...props}) => {
     const pageSectionClasses = ColorSelect[type];
+    const borderClasses = hasBottomBorder ? "border-b-2 border-b-gray":"";
     return (
-        <div className={`${pageSectionClasses.bgColorClass} border-b-2 border-b-gray py-14`}>
+        <div className={`${pageSectionClasses.bgColorClass} ${borderClasses} py-14`}>
             <div className={`${pageSectionClasses.titleColorClass}`}>
                 <h1 className="text-center text-5xl font-bold">
                     {props.title}

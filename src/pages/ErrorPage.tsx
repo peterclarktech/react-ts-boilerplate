@@ -6,7 +6,7 @@ const ErrorPage: FC<{ title?:string, message?: string }> = ({ title, message }) 
     if (!message) message = "Something went wrong with your last action.";
     return (
         <>
-            <PageSection title={title} subtitle={message}>
+            <PageSection title={title} subtitle={message} hasBottomBorder={false}>
             </PageSection>
         </>
     )
