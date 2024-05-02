@@ -11,9 +11,9 @@ export type NavLinkItem = {
     text: string
 }
 const Sidebar: FC<SidebarProps> = (props) => {
-    const mapToLink = (navItem: NavLinkItem) => {
+    const mapToLink = (navItem: NavLinkItem, index:number) => {
         return (
-            <li>
+            <li key={`${index}${navItem.text}`} >
             <NavLink className="font-bold hover:underline" to={navItem.to}>
                 <div className="w-full my-5">{navItem.text}</div>
             </NavLink>
@@ -22,7 +22,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
     }
 
     return (
-        <div className="border rounded-md max-w-64 min-h-80 text-center p-5 mx-10">
+        <div className="border rounded-md min-w-52 min-h-80 text-center mx-10 p-5">
             <div className="text-xl font-bold mb-5">
                 {props.title}
             </div>
