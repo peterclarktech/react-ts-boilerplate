@@ -1,31 +1,29 @@
+import CrudTable, { HeaderData } from "../../components/CrudTable";
 import PageSection from "../../components/PageSection";
 import ColorGroup from "../../utils/ColorGroup";
+import SampleCrudData from "../../utils/SampleData";
 
 export default function UserListPage() {
+    const headerData:Array<HeaderData> = SampleCrudData.UserHeaders;
+    const userData:{}[]=SampleCrudData.UserData;
+
+    const onEdit = (data:any) => {
+        alert(`${data.username} - EDIT TODO!`);
+    }
+
+    const onDelete = (data:any) => {
+        alert(`${data.username} - DELETE TODO!`);
+    }
+
+    const onAdd = () => {
+        alert('ADD TODO!');
+    }
     return (
         <PageSection colorGroup={ColorGroup.inherit} hasBottomBorder={false}>
-            <table className="table-auto">
-                <thead>
-                    <tr className="">
-                        <td className="border p-5">Username</td>
-                        <td className="border p-5">First Name</td>
-                        <td className="border p-5">Last Name</td>
-                        <td className="border p-5">Middle Initial</td>
-                        <td className="border p-5">Role</td>
-                        <td className="border p-5">Actions</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td className="border">peterclark</td>
-                        <td className="border">Peter Clark</td>
-                        <td className="border">Guisadio</td>
-                        <td className="border">L</td>
-                        <td className="border">Admin</td>
-                        <td className="border">(buttons here)</td>
-                    </tr>
-                </tbody>
-            </table>
+            <CrudTable key={"usertbl"} headerData={headerData} listData={userData}
+                addFn={onAdd} editFn={onEdit} deleteFn={onDelete}>
+                User List
+            </CrudTable>
         </PageSection>
     )
 }
