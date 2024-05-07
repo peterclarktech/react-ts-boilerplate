@@ -31,7 +31,7 @@ const CrudTable: FC<CrudTableProps> = (props) => {
         const headerName: string = item.headerText ? item.headerText : item.dataField
         const hiddenClass: string = canHide ? "hidden md:table-cell" : "";
         return (
-            <th key={`${tblKey}_th${index}`} className={`p-5 ${hiddenClass}`}>{headerName}</th>
+            <th key={`${tblKey}_th${index}`} className={`p-5 text-left ${hiddenClass}`}>{headerName}</th>
         )
     });
 
@@ -71,15 +71,18 @@ const CrudTable: FC<CrudTableProps> = (props) => {
 
     return (
         <table className={className}>
-            <caption>
-                {children} &nbsp; 
-                <button className="float-right border p-2" onClick={()=>addFn()}>+ <span className="hidden md:inline">Add Record</span></button>
+            <caption className="p-5">
+                {children}
+                <br/>
+                {enableAdd &&
+                    (<button className="float-right border p-2" onClick={() => addFn()}>+ <span className="hidden md:inline">Add Record</span></button>)
+                }
             </caption>
             <thead>
                 <tr key={`${tblKey}_tr_header`} className="">
                     {renderHeaders}
                     {(enableEdit || enableDelete) &&
-                        (<th key={`${tblKey}_th_actions`}>Actions</th>)
+                        (<th key={`${tblKey}_th_actions`}>&nbsp;</th>)
                     }
                 </tr>
             </thead>
