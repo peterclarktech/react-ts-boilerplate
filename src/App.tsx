@@ -17,9 +17,7 @@ export default function App() {
         <Header.HeaderLink to="/crudsample" iconClass="bi bi-journal-richtext">CRUD Sample</Header.HeaderLink>
         <Header.HeaderLink to="/author" iconClass="bi bi-person-vcard">Author</Header.HeaderLink>
       </Header.HeaderBody>
-      <main className="flex-1">
-        <Outlet/>
-      </main>
+      <Outlet/>
       <Footer>
         <span>Company Name, Inc. &copy;{year}</span>
       </Footer>

@@ -7,7 +7,7 @@ type HeaderProps = {
 }
 const HeaderBody: FC<HeaderProps> = (props: HeaderProps) => {
     return (
-        <header className="bg-positive-dark sticky top-0 z-10">
+        <header className="bg-positive-dark sticky top-0 z-10 flex-none">
             <nav className="flex flex-row mx-2 sm:mx-20 py-2 gap-x-10 sm:gap-x-8">
                 {props.children}
             </nav>

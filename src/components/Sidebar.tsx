@@ -1,37 +1,64 @@
 import { FC } from "react"
 import { NavLink } from "react-router-dom"
+import ColorGroup, { ColorSelect } from "../utils/ColorGroup"
 
-type SidebarProps = {
-    children?: React.ReactNode,
-    title?: string,
-    navlinks: Array<NavLinkItem>
-}
 export type NavLinkItem = {
     to: string,
     text: string
 }
-const Sidebar: FC<SidebarProps> = (props) => {
-    const mapToLink = (navItem: NavLinkItem, index:number) => {
+
+type SidebarSectionProps = {
+    title?: string,
+    navlinks: Array<NavLinkItem>
+}
+const SidebarSection: FC<SidebarSectionProps> = ({ title, navlinks }) => {
+    const mapToLink = (navItem: NavLinkItem, index: number) => {
         return (
-            <li key={`${index}${navItem.text}`} >
-            <NavLink className="font-bold hover:underline" to={navItem.to}>
-                <div className="w-full my-5">{navItem.text}</div>
-            </NavLink>
+            <li key={`nav_${title}_${index}_${navItem.text}`} >
+                <NavLink className="font-bold" to={navItem.to}>
+                    <div className="w-full p-3 hover:bg-gray-light dark:hover:bg-gray rounded-md">{navItem.text}</div>
+                </NavLink>
             </li>
         )
     }
 
     return (
-        <div className="border rounded-md min-w-52 min-h-80 text-center mx-10 p-5">
-            <div className="text-xl font-bold mb-5">
-                {props.title}
+        <>
+            <div className="text-lg font-bold mb-2">
+                {title}
             </div>
-            <hr/>
-            <ul>
-                {props.navlinks.map(mapToLink)}
+            <ul className="ml-2">
+                {navlinks.map(mapToLink)}
             </ul>
+        </>
+    )
+}
+
+type SidebarProps = {
+    children?: React.ReactNode,
+    title?: string,
+    colorGroup?: ColorGroup,
+}
+const SidebarMain: FC<SidebarProps> = (props) => {
+    const { children, title, colorGroup = ColorGroup.inherit } = props;
+    const colorClasses = ColorSelect[colorGroup];
+
+    const renderTitle = title && (
+        <div className={`text-lg text-opacity-70 dark:text-opacity-70 font-bold mb-5 ${colorClasses.titleColorClass}`}>
+            {title}
         </div>
     )
+    return (
+        <div className={`min-w-52 max-w-96 h-full px-10 py-5 bg-opacity-70 dark:bg-opacity-80 ${colorClasses.textColorClass} ${colorClasses.bgColorClass}`}>
+            {renderTitle}
+            {children}
+        </div>
+    )
+}
+
+const Sidebar = {
+    Main: SidebarMain,
+    Section: SidebarSection
 }
 
 export default Sidebar;
