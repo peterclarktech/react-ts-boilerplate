@@ -5,7 +5,8 @@ enum ColorGroup {
     dark,
     positive,
     danger,
-    accent
+    accent,
+    neutral
 }
 
 export default ColorGroup;
@@ -16,7 +17,7 @@ type ColorSelectType = {
     textColorClass:string
 };
 
-export const ColorSelect: Array<ColorSelectType> = new Array<ColorSelectType>(7);
+export const ColorSelect: Array<ColorSelectType> = new Array<ColorSelectType>(8);
 ColorSelect[ColorGroup.inherit] = {bgColorClass:"", titleColorClass:"", textColorClass:""};
 ColorSelect[ColorGroup.normal] = {
     bgColorClass:"bg-white dark:bg-gray-dark", 
@@ -40,5 +41,9 @@ ColorSelect[ColorGroup.danger] = {
     textColorClass:"text-black dark:text-white"};
 ColorSelect[ColorGroup.accent] = {
     bgColorClass:"bg-accent-light dark:bg-accent-dark",
+    titleColorClass:"text-black dark:text-white",
+    textColorClass:"text-black dark:text-white"};
+ColorSelect[ColorGroup.neutral] = {
+    bgColorClass:"bg-gray-light dark:bg-gray",
     titleColorClass:"text-black dark:text-white",
     textColorClass:"text-black dark:text-white"};

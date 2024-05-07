@@ -14,9 +14,9 @@ export default {
       'danger': '#CB666B',
       'danger-light': '#E38F93',
       'danger-dark': '#AF3E44',
-      'accent': '#A45382',
-      'accent-light': '#B8749C',
-      'accent-dark': '#8E3268'
+      'accent': '#2D3370',
+      'accent-light': '#5E6394',
+      'accent-dark': '#1A205E'
     },
     extend: {
       dropShadow: {
