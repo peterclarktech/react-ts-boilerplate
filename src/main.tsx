@@ -9,7 +9,6 @@ import "bootstrap-icons/font/bootstrap-icons.css"
 import { RouterProvider, createBrowserRouter, defer } from 'react-router-dom';
 
 import App from './App';
-import AuthorPage from './pages/AuthorPage';
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import CrudLayoutPage from './pages/crudpages/CrudLayoutPage';
@@ -43,10 +42,6 @@ const router = createBrowserRouter([
             element: <ErrorPage message="Page not found" />
           }
         ]
-      },
-      {
-        path: "author",
-        element: <AuthorPage />
       },
       {
         path: "*",

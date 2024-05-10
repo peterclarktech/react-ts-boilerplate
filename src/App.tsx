@@ -14,8 +14,7 @@ export default function App() {
       <Header.HeaderBody>
         <Header.HeaderLogo linkto="/" imgSrc={reactlogo} imgAlt="React" imgClass="">React Boilerplate Project</Header.HeaderLogo>
         <Header.HeaderLink to="/" iconClass="bi bi-house">Home</Header.HeaderLink>
-        <Header.HeaderLink to="/crudsample" iconClass="bi bi-journal-richtext">CRUD Sample</Header.HeaderLink>
-        <Header.HeaderLink to="/author" iconClass="bi bi-person-vcard">Author</Header.HeaderLink>
+        <Header.HeaderLink to="/crudsample" iconClass="bi bi-journal-richtext">CRUD Samples</Header.HeaderLink>
       </Header.HeaderBody>
       <Outlet/>
       <Footer>
