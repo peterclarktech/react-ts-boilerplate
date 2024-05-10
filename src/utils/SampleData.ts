@@ -38,6 +38,20 @@ const UserData = [
         lastName: "Jameson",
         middleInitial: "J.",
         role: "editor"
+    },
+    {
+        username: "tstark",
+        firstName: "Tony",
+        lastName: "Stark",
+        middleInitial: "I.",
+        role: "superhero"
+    },
+    {
+        username: "h_osborne",
+        firstName: "Harry",
+        lastName: "Osborne",
+        middleInitial: "G.",
+        role: "villain"
     }
 ]
 

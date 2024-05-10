@@ -10,7 +10,7 @@ export default function App() {
   const year = new Date().getFullYear();
 
   return (
-    <div className="flex flex-col min-h-svh bg-white text-black dark:bg-gray-dark dark:text-white">
+    <div className="flex flex-col min-h-svh text-black dark:bg-gray-dark dark:text-white">
       <Header.HeaderBody>
         <Header.HeaderLogo linkto="/" imgSrc={reactlogo} imgAlt="React" imgClass="">React Boilerplate Project</Header.HeaderLogo>
         <Header.HeaderLink to="/" iconClass="bi bi-house">Home</Header.HeaderLink>

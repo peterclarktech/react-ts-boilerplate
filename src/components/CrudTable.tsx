@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Button from "./Button";
+import Button, { ButtonType } from "./Button";
 
 export type HeaderData = {
     headerText?: string,
@@ -23,7 +23,7 @@ export type CrudTableProps = {
     deleteFn?: (data: {}) => void
 }
 const CrudTable: FC<CrudTableProps> = (props) => {
-    const { tblKey, className, children, headerData, listData,
+    const { tblKey, children, headerData, listData,
         enableAdd = true, enableEdit = true, enableDelete = true,
         addFn = () => { }, deleteFn = () => { }, editFn = () => { } } = props;
 
@@ -44,7 +44,6 @@ const CrudTable: FC<CrudTableProps> = (props) => {
                 (<>{item[headerItem.dataField]}</>);
 
             const hiddenClass: string = canHide ? "hidden md:table-cell" : "";
-
             return (
                 <td key={`${tblKey}_row${index}col${headerIndex}`} className={`p-5 ${hiddenClass}`}>{renderContent}</td>
             )
@@ -66,8 +65,10 @@ const CrudTable: FC<CrudTableProps> = (props) => {
             </td>
         );
 
+        const grayShadowClass: string = ((index % 2) !== 0) ? "shadow-inner-fill-gray" : "";
+
         return (
-            <tr key={`${tblKey}_tr${index}`} className="my-5 border-b border-b-gray">
+            <tr key={`${tblKey}_tr${index}`} className={`${grayShadowClass} my-5`}>
                 {renderCols}
                 {renderActions}
             </tr>
@@ -75,31 +76,39 @@ const CrudTable: FC<CrudTableProps> = (props) => {
     });
 
     return (
-        <table className={className}>
-            <caption className="p-5">
-                {children}
-                <br/>
-                {enableAdd &&
-                    (<div className="float-right">
-                        <Button onClick={() => addFn()}>
-                            <span><i className="bi bi-plus"></i></span>
-                            <span className="hidden md:inline">Add Record</span>
-                        </Button>
-                    </div>)
-                }
-            </caption>
-            <thead>
-                <tr key={`${tblKey}_tr_header`} className="">
-                    {renderHeaders}
-                    {(enableEdit || enableDelete) &&
-                        (<th key={`${tblKey}_th_actions`}>&nbsp;</th>)
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                {renderRows}
-            </tbody>
-        </table>
+        <div className="border-0 rounded-xl my-5 p-5 mx-auto shadow-2xl">
+            <table className="w-full">
+                <caption className="p-5">
+                    {children}
+                    <div className="my-5">
+                        <div className="float-left">
+                            <label htmlFor="searchtxt"><i className="bi bi-search"></i> : </label>
+                            <input id="searchtxt" name="searchtxt" className="border border-gray-light rounded-lg py-2 px-4" type="text" placeholder="Search text..." />
+                        </div>
+                        {enableAdd &&
+                            (<div className="float-right">
+                                <Button type={ButtonType.primary} onClick={() => addFn()}>
+                                    <span><i className="bi bi-plus"></i></span>
+                                    <span className="hidden md:inline">Add Record</span>
+                                </Button>
+                            </div>)
+                        }
+                    </div>
+                </caption>
+                <thead>
+                    <tr key={`${tblKey}_tr_header`} className="border-b border-b-gray">
+                        {renderHeaders}
+                        {(enableEdit || enableDelete) &&
+                            (<th key={`${tblKey}_th_actions`}>&nbsp;</th>)
+                        }
+                    </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-light">
+                    {renderRows}
+                </tbody>
+            </table>
+            <div className="my-5">Showing [x] of [n] items</div>
+        </div>
     )
 }
 

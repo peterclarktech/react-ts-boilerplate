@@ -41,8 +41,8 @@ ColorSelect[ColorGroup.danger] = {
     textColorClass:"text-black dark:text-white"};
 ColorSelect[ColorGroup.accent] = {
     bgColorClass:"bg-accent-light dark:bg-accent-dark",
-    titleColorClass:"text-black dark:text-white",
-    textColorClass:"text-black dark:text-white"};
+    titleColorClass:"text-white",
+    textColorClass:"text-white"};
 ColorSelect[ColorGroup.neutral] = {
     bgColorClass:"bg-gray-light dark:bg-gray",
     titleColorClass:"text-black dark:text-white",

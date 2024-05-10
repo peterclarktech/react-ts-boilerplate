@@ -29,6 +29,9 @@ export default {
             '0 45px 65px rgba(0, 0, 0, 0.15)'
         ]
       },
+      boxShadow: {
+        'inner-fill-gray': 'inset 0 0 9999px #00000010'
+      },
       animation: {
         'spin-slow': 'spin 10s linear infinite',
       }

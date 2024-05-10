@@ -16,7 +16,7 @@ const Button: FC<ButtonProps> = (props) => {
     else if (type === ButtonType.danger) colorClass = ColorSelect[ColorGroup.danger];
 
     return (
-        <button className={`${colorClass.bgColorClass} ${colorClass.textColorClass} border border-gray-light dark:border-gray rounded-lg py-1 px-2 hover:drop-shadow dark:hover:drop-shadow-gray`} 
+        <button className={`${colorClass.bgColorClass} ${colorClass.textColorClass} border border-gray-light dark:border-gray rounded-lg py-2 px-4 hover:drop-shadow dark:hover:drop-shadow-gray`} 
             onClick={onClick}>
                 {children}
         </button>
