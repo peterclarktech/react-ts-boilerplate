@@ -2,7 +2,7 @@ import SampleCrudData from "../utils/SampleData";
 
 const loadSampleData = async (addDelay = true) => {
     const delayFn = () => {
-        return new Promise(resolve => setTimeout(resolve, 3000));
+        return new Promise(resolve => setTimeout(resolve, 2000));
     }
 
     if (addDelay) await delayFn();
