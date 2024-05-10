@@ -52,11 +52,15 @@ const CrudTable: FC<CrudTableProps> = (props) => {
         const renderActions = (enableEdit || enableDelete) && (
             <td>
                 {enableEdit &&
-                    (<a className="hover:underline" href="#" onClick={() => editFn(item)}>Edit</a>)
+                    (<a className="p-1 rounded-lg border border-none hover:text-gray-light" href="#" onClick={() => editFn(item)}>
+                        <span><i className="bi bi-pencil-square"></i></span>
+                    </a>)
                 }
                 &nbsp;
                 {enableDelete &&
-                    (<a className="hover:underline" href="#" onClick={() => deleteFn(item)}>Del</a>)
+                    (<a className="p-1 rounded-lg border border-none hover:text-gray-light" href="#" onClick={() => deleteFn(item)}>
+                        <span><i className="bi bi-trash"></i></span>
+                    </a>)
                 }
             </td>
         );
