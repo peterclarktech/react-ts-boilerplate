@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Button from "./Button";
 
 export type HeaderData = {
     headerText?: string,
@@ -79,7 +80,12 @@ const CrudTable: FC<CrudTableProps> = (props) => {
                 {children}
                 <br/>
                 {enableAdd &&
-                    (<button className="float-right border p-2" onClick={() => addFn()}>+ <span className="hidden md:inline">Add Record</span></button>)
+                    (<div className="float-right">
+                        <Button onClick={() => addFn()}>
+                            <span><i className="bi bi-plus"></i></span>
+                            <span className="hidden md:inline">Add Record</span>
+                        </Button>
+                    </div>)
                 }
             </caption>
             <thead>

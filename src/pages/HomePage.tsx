@@ -7,6 +7,7 @@ import Card from '../components/Card';
 
 import useDarkMode from '../hooks/useDarkMode';
 import ColorGroup from '../utils/ColorGroup';
+import Button, { ButtonType } from '../components/Button';
 
 export default function HomePage() {
     const [count, setCount] = useState(0);
@@ -47,9 +48,9 @@ export default function HomePage() {
                     </div>
                 </div>
                 <div className="text-center">
-                    <button className="border p-1 rounded-full" onClick={() => setCount((count) => count + 1)}>
+                    <Button type={ButtonType.default} onClick={() => setCount((count) => count + 1)}>
                         Count is {count}
-                    </button>
+                    </Button>
                     <br />
                     <br />
                     <p>
@@ -59,7 +60,7 @@ export default function HomePage() {
             </PageSection>
             <PageSection title="Tailwind CSS" 
                 subtitle="Rapidly build modern websites without ever leaving your HTML" 
-                colorGroup={ColorGroup.positive}>
+                colorGroup={ColorGroup.accent}>
                 <div className="flex my-10">
                     <div className="mx-auto flex flex-row">
                         <div>

@@ -16,7 +16,7 @@ export default function CrudLayoutPage() {
     return (
         <div className="flex flex-col lg:flex-row flex-1">
             <div className="flex-none">
-                <Sidebar.Main title="CRUD Samples" colorGroup={ColorGroup.accent}>
+                <Sidebar.Main title="CRUD Samples" colorGroup={ColorGroup.positive}>
                     <Sidebar.Section key={"sidebar_section0"} title="User Maintenance" navlinks={navLinks} />
                     <Sidebar.Section key={"sidebar_section1"} navlinks={navLinks2} />
                 </Sidebar.Main>
