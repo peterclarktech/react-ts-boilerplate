@@ -23,12 +23,12 @@ const Pagination: FC<PaginationType> = ({ totalSize, pageSize = 10, onPaginate }
     }
 
     return (
-        <div className="flex">
+        <div className="flex flex-col sm:flex-row">
             <div className="float-left content-center flex-none">
                 <span>{`Showing ${startIndex + 1}-${endIndex + 1} out of ${totalSize} rows`}</span>
             </div>
             <div className="flex-1">
-                <div className="float-right">
+                <div className="sm:float-right">
                     <Button type={currentPage !== 1 ? ButtonType.default : ButtonType.disabled}
                         onClick={() => changePage(1)}>
                         <i className="bi bi-chevron-bar-left"></i>
