@@ -35,7 +35,7 @@ const SidebarSection: FC<SidebarSectionProps> = ({ title, navlinks }) => {
         return (
             <li key={`nav_${title}_${index}_${navItem.text}`} >
                 <NavLink className="font-bold" to={navItem.to} onClick={navClickHandler}>
-                    <div className="w-full p-3 hover:bg-gray-light dark:hover:bg-gray rounded-md">{navItem.text}</div>
+                    <div className="w-full p-3 hover:shadow-inner-fill-gray rounded-md">{navItem.text}</div>
                 </NavLink>
             </li>
         )
