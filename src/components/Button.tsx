@@ -1,7 +1,7 @@
 import { FC, MouseEventHandler } from "react";
 import ColorGroup, { ColorSelect } from "../utils/ColorGroup";
 
-export enum ButtonType {default,primary,positive,danger}
+export enum ButtonType {default,primary,positive,danger,disabled}
 type ButtonProps = {
     type?: ButtonType,
     children?: React.ReactNode,
@@ -15,8 +15,11 @@ const Button: FC<ButtonProps> = (props) => {
     else if (type === ButtonType.positive) colorClass = ColorSelect[ColorGroup.positive];
     else if (type === ButtonType.danger) colorClass = ColorSelect[ColorGroup.danger];
 
+    const hoverClasses = type === ButtonType.disabled ? "" : "hover:drop-shadow dark:hover:drop-shadow-gray";
+
     return (
-        <button className={`${colorClass.bgColorClass} ${colorClass.textColorClass} border border-gray-light dark:border-gray rounded-lg py-2 px-4 hover:drop-shadow dark:hover:drop-shadow-gray`} 
+        <button disabled={type === ButtonType.disabled} 
+            className={`${colorClass.bgColorClass} ${colorClass.textColorClass} border border-gray-light dark:border-gray rounded-lg py-2 px-4 ${hoverClasses}`} 
             onClick={onClick}>
                 {children}
         </button>

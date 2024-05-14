@@ -1,5 +1,7 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Button, { ButtonType } from "./Button";
+import SearchBar from "./SearchBar";
+import Pagination from "./Pagination";
 
 export type HeaderData = {
     headerText?: string,
@@ -20,60 +22,67 @@ export type CrudTableProps = {
     enableEdit?: boolean,
     editFn?: (data: {}) => void,
     enableDelete?: boolean,
-    deleteFn?: (data: {}) => void
+    deleteFn?: (data: {}) => void,
+    pagination?: {
+        pageSize: number
+    }
 }
 const CrudTable: FC<CrudTableProps> = (props) => {
     const { tblKey, children, headerData, listData,
         enableAdd = true, enableEdit = true, enableDelete = true,
-        addFn = () => { }, deleteFn = () => { }, editFn = () => { } } = props;
+        addFn = () => { }, deleteFn = () => { }, editFn = () => { },
+        pagination = { pageSize: 10 } } = props;
 
+    const [filteredData, setFilteredData] = useState<typeof listData>(props.listData);
+    const [pagedData, setPagedData] = useState<typeof listData>(new Array<any>);
+
+    const searchableHeaders = new Array<string>;
     const renderHeaders = headerData.map((item, index) => {
-        const { canHide = false } = item;
+        const { canHide = false, isSearchable = true } = item;
         const headerName: string = item.headerText ? item.headerText : item.dataField
         const hiddenClass: string = canHide ? "hidden md:table-cell" : "";
+
+        if (isSearchable) searchableHeaders.push(item.dataField);
+
         return (
             <th key={`${tblKey}_th${index}`} className={`p-5 text-left ${hiddenClass}`}>{headerName}</th>
         )
     });
 
-    const renderRows = listData.map((item, index) => {
-        const renderCols = headerData.map((headerItem, headerIndex) => {
-            const { canHide = false } = headerItem;
-            const renderContent: JSX.Element = headerItem.template ?
-                headerItem.template(item) :
-                (<>{item[headerItem.dataField]}</>);
+    const onFilter = (data: typeof listData) => {
+        setFilteredData(data);
+    }
 
-            const hiddenClass: string = canHide ? "hidden md:table-cell" : "";
-            return (
-                <td key={`${tblKey}_row${index}col${headerIndex}`} className={`p-5 ${hiddenClass}`}>{renderContent}</td>
-            )
+    const filterFn = (data: typeof listData, searchTxt: string) => {
+        return data.filter((row) => {
+            let result: boolean = false;
+            for (let searchHeader of searchableHeaders) {
+                result = (row[searchHeader] as string).toUpperCase().includes(searchTxt.toUpperCase());
+                if (result) break;
+            }
+            return result;
         });
+    }
 
-        const renderActions = (enableEdit || enableDelete) && (
-            <td>
-                {enableEdit &&
-                    (<a className="p-1 rounded-lg border border-none hover:text-gray-light" href="#" onClick={() => editFn(item)}>
-                        <span><i className="bi bi-pencil-square"></i></span>
-                    </a>)
-                }
-                &nbsp;
-                {enableDelete &&
-                    (<a className="p-1 rounded-lg border border-none hover:text-gray-light" href="#" onClick={() => deleteFn(item)}>
-                        <span><i className="bi bi-trash"></i></span>
-                    </a>)
-                }
-            </td>
-        );
+    const paginationHandler = (startIndex: number, endIndex: number) => {
+        setPagedData(filteredData.slice(startIndex, endIndex + 1));
+    }
 
-        const grayShadowClass: string = ((index % 2) !== 0) ? "shadow-inner-fill-gray" : "";
-
-        return (
-            <tr key={`${tblKey}_tr${index}`} className={`${grayShadowClass} my-5`}>
-                {renderCols}
-                {renderActions}
-            </tr>
-        )
-    });
+    const renderActions = (item: any) => (
+        <td>
+            {enableEdit &&
+                (<a className="p-1 rounded-lg border border-none hover:text-gray-light" href="#" onClick={() => editFn(item)}>
+                    <span><i className="bi bi-pencil-square"></i></span>
+                </a>)
+            }
+            &nbsp;
+            {enableDelete &&
+                (<a className="p-1 rounded-lg border border-none hover:text-gray-light" href="#" onClick={() => deleteFn(item)}>
+                    <span><i className="bi bi-trash"></i></span>
+                </a>)
+            }
+        </td>
+    );
 
     return (
         <div className="border-0 rounded-xl my-5 p-5 mx-auto shadow-2xl">
@@ -82,8 +91,7 @@ const CrudTable: FC<CrudTableProps> = (props) => {
                     {children}
                     <div className="my-5">
                         <div className="float-left">
-                            <label htmlFor="searchtxt"><i className="bi bi-search"></i> : </label>
-                            <input id="searchtxt" name="searchtxt" className="border border-gray-light rounded-lg py-2 px-4" type="text" placeholder="Search text..." />
+                            <SearchBar id="searchusersbar" placeholder="Search users" data={listData} filterFn={filterFn} onFilter={onFilter} />
                         </div>
                         {enableAdd &&
                             (<div className="float-right">
@@ -104,12 +112,43 @@ const CrudTable: FC<CrudTableProps> = (props) => {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-light">
-                    {renderRows}
+                        <CrudTableRows data={pagedData} headerData={headerData} renderActions={renderActions}/>
                 </tbody>
             </table>
-            <div className="my-5">Showing [x] of [n] items</div>
+            <div className="my-5">
+                <Pagination totalSize={filteredData.length} pageSize={pagination.pageSize} onPaginate={paginationHandler} />
+            </div>
         </div>
     )
 }
 
 export default CrudTable;
+
+
+const CrudTableRows: FC<{ data: Array<any>, headerData: Array<any>, renderActions: (item: any) => React.ReactNode }> = ({ data, headerData, renderActions }) => {
+    const rows = data.map((item, index) => {
+
+        const renderCols = headerData.map((headerItem, headerIndex) => {
+            const { canHide = false } = headerItem;
+            const renderContent: JSX.Element = headerItem.template ?
+                headerItem.template(item) :
+                (<>{item[headerItem.dataField]}</>);
+
+            const hiddenClass: string = canHide ? "hidden md:table-cell" : "";
+            return (
+                <td key={`row${index}col${headerIndex}`} className={`p-5 ${hiddenClass}`}>{renderContent}</td>
+            )
+        });
+
+        const grayShadowClass: string = ((index % 2) !== 0) ? "shadow-inner-fill-gray" : "";
+
+        return (
+            <tr key={`tr${index}`} className={`${grayShadowClass} my-5`}>
+                {renderCols}
+                {renderActions(item)}
+            </tr>
+        )
+    });
+
+    return rows;
+}

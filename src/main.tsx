@@ -33,7 +33,6 @@ const router = createBrowserRouter([
             index: true,
             element: <UserListPage />,
             loader: async ({ params }) => {
-              console.log(params);
               return defer({ data: loadSampleData() });
             },
           },
