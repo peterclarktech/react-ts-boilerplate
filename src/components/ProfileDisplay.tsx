@@ -10,21 +10,13 @@ const ProfileDisplay: FC<{}> = () => {
         appContext.setUser({ username: "", firstname: "" });
     }
 
-    const loginDisplay = (
-        <NavLink className={"hover:text-gray-light hover:underline"} to="/login">Please Login</NavLink>
-    )
-
-    const logoutDisplay = (
-        <NavLink className={"hover:text-gray-light hover:underline"} to={"/"} onClick={logoutHandler}>Logout</NavLink>
-    )
-
     return (
         <span className="text-white">
-            {isLoggedIn && <span className="font-extralight mr-2 hidden sm:inline">Hi, {appContext.user.firstname}</span>}
-            <span className="mx-2">
-                <span className=""><i className="bi bi-person-circle"></i></span>
-            </span>
-            {isLoggedIn ? (logoutDisplay) : (loginDisplay)}
+            {isLoggedIn && <span className="font-extralight mr-2 hidden sm:inline">Hi, {appContext.user.firstname}!</span>}
+            <NavLink className={"hover:text-gray-light"} to={isLoggedIn ? "/" : "/login"} 
+                onClick={isLoggedIn ? logoutHandler : () => { }}>
+                <span className=""><i className="bi bi-person"></i></span> {isLoggedIn ? "Logout" : "Login"}
+            </NavLink>
         </span>
     );
 };
