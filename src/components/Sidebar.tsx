@@ -49,10 +49,12 @@ const SidebarSection: FC<SidebarSectionProps> = ({ title, navlinks }) => {
 
     return (
         <>
-            {title && (<div className="text-lg font-bold p-2 hover:cursor-pointer rounded-md" onClick={handleTitleClick}>
-                <span>{title} &nbsp; <i className={chevronClass}></i></span>
+            {title && (
+            <div className="text-lg font-bold p-2 rounded-md" onClick={handleTitleClick}>
+                <a href="#"><span>{title} &nbsp; <i className={chevronClass}></i></span></a>
             </div>)}
-            {showLinks && (<ul className="ml-2">
+            {showLinks && (
+            <ul className="ml-2">
                 {navlinks.map(mapToLink)}
             </ul>)}
             <hr className="my-2 text-opacity-70 dark:text-opacity-70" />
