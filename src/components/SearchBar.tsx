@@ -1,5 +1,6 @@
-import { ChangeEventHandler, FC, useState } from "react";
+import { FC, useState } from "react";
 import Loader from "./Loader";
+import TextField from "./form/TextField";
 
 type SearchBarProps = {
     id: string,
@@ -19,22 +20,21 @@ const SearchBar: FC<SearchBarProps> = ({ id, placeholder, data, onFilter, filter
         setIsLoading(false);
     }
 
-    const onChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const onTextChangeHandler = (value: string) => {
         if (timeoutid) clearTimeout(timeoutid);
         timeoutid = setTimeout(() => {
-            startSearching(event.target.value)
+            startSearching(value)
         }, 1000);
     }
 
     return (
         <>
-            <Loader isLoading={isLoading} loadingText="Searching Users"/>
+            <Loader isLoading={isLoading} loadingText="Searching Users" />
             {!isLoading && (
                 <>
-                    <label htmlFor={id}><i className="bi bi-search"></i> : </label>
-                    <input type="text" id={id} name="searchtxt" placeholder={placeholder}
-                        className="border border-gray-light bg-white text-black rounded-lg py-2 px-4"
-                        onChange={onChangeHandler} />
+                    <TextField id={id} placeholder={placeholder} onChange={onTextChangeHandler}>
+                        <i className="bi bi-search"></i>&nbsp;:&nbsp;
+                    </TextField>
                 </>
             )}
 
