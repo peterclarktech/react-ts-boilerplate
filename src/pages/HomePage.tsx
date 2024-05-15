@@ -53,7 +53,7 @@ export default function HomePage() {
                     </div>
                 </div>
                 <div className="text-center">
-                    <Button type={ButtonType.default} onClick={() => setCount((count) => count + 1)}>
+                    <Button variant={ButtonType.default} onClick={() => setCount((count) => count + 1)}>
                         Count is {count}
                     </Button>
                     <br />

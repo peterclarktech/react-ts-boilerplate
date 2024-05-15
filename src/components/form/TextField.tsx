@@ -1,14 +1,19 @@
-import { ChangeEventHandler, FC } from "react";
+import { ChangeEventHandler, KeyboardEventHandler, forwardRef } from "react";
 
 
 type TextFieldProps = {
     id: string,
     placeholder?: string,
     onChange?: (value: string) => void,
+    onKeyDown?: KeyboardEventHandler,
     children?: React.ReactNode,
-    ref?: React.RefObject<HTMLInputElement>
+    isPassword?: boolean
 }
-const TextField: FC<TextFieldProps> = ({ id, placeholder = "Enter Text...", onChange = () => { }, children, ref=null }) => {
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
+    const { id, placeholder = "Enter Text...",
+        onChange = () => { }, onKeyDown = () => { },
+        children, isPassword = false } = props;
+
     const changeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
         onChange(event.target.value);
     }
@@ -16,11 +21,11 @@ const TextField: FC<TextFieldProps> = ({ id, placeholder = "Enter Text...", onCh
     return (
         <>
             <label htmlFor={id}>{children}</label>
-            <input ref={ref} type="text" id={id} name="searchtxt" placeholder={placeholder}
+            <input ref={ref} type={isPassword ? "password" : "text"} id={id} name="searchtxt" placeholder={placeholder}
                 className="border border-gray-light bg-white text-black rounded-lg py-2 px-4"
-                onChange={changeHandler} />
+                onChange={changeHandler} onKeyDown={onKeyDown} />
         </>
     )
-}
+})
 
 export default TextField;

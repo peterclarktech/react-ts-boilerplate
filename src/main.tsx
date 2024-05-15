@@ -13,6 +13,8 @@ import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import CrudLayoutPage from './pages/crudpages/CrudLayoutPage';
 import UserListPage from './pages/crudpages/UserListPage';
+import LoginPage from './pages/LoginPage';
+
 import loadSampleData from './services/LoadSampleData';
 
 const router = createBrowserRouter([
@@ -26,13 +28,18 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
+        path: "/login",
+        element: <LoginPage/>,
+        errorElement: <ErrorPage/>
+      },
+      {
         path: "/crudsample",
         element: <CrudLayoutPage />,
         children: [
           {
             index: true,
             element: <UserListPage />,
-            loader: async ({ params }) => {
+            loader: async ({ /*params*/ }) => {
               return defer({ data: loadSampleData() });
             },
           },

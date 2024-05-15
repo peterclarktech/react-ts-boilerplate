@@ -2,6 +2,7 @@ import { FC } from "react";
 
 import { Link } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
+import ProfileDisplay from "./ProfileDisplay";
 
 type HeaderProps = {
     children?: React.ReactNode
@@ -11,8 +12,8 @@ const HeaderBody: FC<HeaderProps> = (props: HeaderProps) => {
         <header className="bg-positive-dark sticky top-0 z-10 flex-none">
             <nav className="flex flex-row mx-2 sm:mx-8 py-2 gap-x-10 sm:gap-x-8">
             <div className="ml-auto order-2 self-center">
-                <DarkModeToggle/>
-                {/* TODO: Add User Profile Component here */}
+                <span><DarkModeToggle/></span>
+                <span className="ml-5"><ProfileDisplay/></span>
             </div>
                 {props.children}
             </nav>

@@ -3,24 +3,26 @@ import ColorGroup, { ColorSelect } from "../utils/ColorGroup";
 
 export enum ButtonType {default,primary,positive,danger,disabled}
 type ButtonProps = {
-    type?: ButtonType,
+    variant?: ButtonType,
     children?: React.ReactNode,
-    onClick: MouseEventHandler
+    onClick?: MouseEventHandler,
+    onMouseEnter?: MouseEventHandler,
+    onMouseLeave?: MouseEventHandler
 }
 const Button: FC<ButtonProps> = (props) => {
-    const { type=ButtonType.default, children, onClick } = props;
+    const { variant=ButtonType.default, children} = props;
 
     let colorClass = ColorSelect[ColorGroup.neutral];//ButtonType.default
-    if (type === ButtonType.primary) colorClass = ColorSelect[ColorGroup.accent];
-    else if (type === ButtonType.positive) colorClass = ColorSelect[ColorGroup.positive];
-    else if (type === ButtonType.danger) colorClass = ColorSelect[ColorGroup.danger];
+    if (variant === ButtonType.primary) colorClass = ColorSelect[ColorGroup.accent];
+    else if (variant === ButtonType.positive) colorClass = ColorSelect[ColorGroup.positive];
+    else if (variant === ButtonType.danger) colorClass = ColorSelect[ColorGroup.danger];
 
-    const hoverClasses = type === ButtonType.disabled ? "" : "hover:drop-shadow dark:hover:drop-shadow-gray";
+    const hoverClasses = variant === ButtonType.disabled ? "" : "hover:drop-shadow dark:hover:drop-shadow-gray";
 
     return (
-        <button disabled={type === ButtonType.disabled} 
+        <button disabled={variant === ButtonType.disabled} 
             className={`${colorClass.bgColorClass} ${colorClass.textColorClass} border border-gray-light dark:border-gray rounded-lg py-2 px-4 ${hoverClasses}`} 
-            onClick={onClick}>
+            {...props}>
                 {children}
         </button>
     )

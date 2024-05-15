@@ -3,14 +3,15 @@ import { DarkMode } from "../utils/ColorGroup";
 import useUserDarkMode from "../hooks/useUserDarkMode";
 
 //ApplicationContext
+export type User = {
+    username: string,
+    firstname: string
+}
 export type AppContextObj = {
     darkmode: DarkMode,
     setDarkmode: (mode: DarkMode) => void,
-    user: {
-        username: string,
-        firstname: string
-    },
-    setUser: (user: { username: string, firstname: string }) => void
+    user: User,
+    setUser: (user: User) => void
 }
 const initAppContext: AppContextObj = {
     darkmode: DarkMode.auto,
@@ -26,13 +27,17 @@ export default AppContext;
 
 export const AppContextWrapper: FC<{ children: React.ReactNode }> = ({ children }) => {
     const [currentDarkMode, setCurrentDarkMode] = useState<DarkMode>(DarkMode.auto);
+    const [user, setUser] = useState<User>({username: "", firstname: ""});
     const userPrefDarkmode = useUserDarkMode();
 
     let currentContext:AppContextObj = {
         ...initAppContext,
+        user: user,
         darkmode: currentDarkMode,
         setDarkmode: (mode) => setCurrentDarkMode(mode),
-        //TODO: Add User Management here
+        setUser: (user: User) => {
+            setUser(user);
+        }
     }
 
     let darkClass = currentContext.darkmode === DarkMode.on || 

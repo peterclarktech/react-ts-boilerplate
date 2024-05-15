@@ -96,7 +96,7 @@ const CrudTable: FC<CrudTableProps> = (props) => {
                         </div>
                         {enableAdd &&
                             (<div className="float-right">
-                                <Button type={ButtonType.primary} onClick={() => addFn()}>
+                                <Button variant={ButtonType.primary} onClick={() => addFn()}>
                                     <span><i className="bi bi-plus"></i></span>
                                     <span className="hidden md:inline">Add Record</span>
                                 </Button>
