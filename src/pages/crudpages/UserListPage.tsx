@@ -32,10 +32,14 @@ const UserTable = () => {
         alert('ADD TODO!');
     }
 
+    const onUserSelect = (data: any) => {
+        alert(`${data.username} - SELECT TODO!`);
+    }
+
     return (
         <div className="max-w-7xl">
             <CrudTable key={"usertbl"} headerData={loadData.UserHeaders} listData={loadData.UserData}
-                addFn={onAdd} editFn={onEdit} deleteFn={onDelete}>
+                addFn={onAdd} editFn={onEdit} deleteFn={onDelete} onSelect={onUserSelect}>
                 <h1 className="font-bold text-3xl text-left">User List</h1>
             </CrudTable>
         </div>

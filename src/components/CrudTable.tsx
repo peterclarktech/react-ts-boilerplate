@@ -25,13 +25,14 @@ export type CrudTableProps = {
     deleteFn?: (data: {}) => void,
     pagination?: {
         pageSize: number
-    }
+    },
+    onSelect?: (datarow: {}) => void
 }
 const CrudTable: FC<CrudTableProps> = (props) => {
     const { tblKey, children, headerData, listData,
         enableAdd = true, enableEdit = true, enableDelete = true,
         addFn = () => { }, deleteFn = () => { }, editFn = () => { },
-        pagination = { pageSize: 10 } } = props;
+        pagination = { pageSize: 10 }, onSelect = () => { } } = props;
 
     const [filteredData, setFilteredData] = useState<typeof listData>(props.listData);
     const [pagedData, setPagedData] = useState<typeof listData>(new Array<any>);
@@ -112,7 +113,7 @@ const CrudTable: FC<CrudTableProps> = (props) => {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-light">
-                        <CrudTableRows data={pagedData} headerData={headerData} renderActions={renderActions}/>
+                    <CrudTableRows data={pagedData} headerData={headerData} renderActions={renderActions} onSelect={onSelect} />
                 </tbody>
             </table>
             <div className="my-5">
@@ -124,8 +125,13 @@ const CrudTable: FC<CrudTableProps> = (props) => {
 
 export default CrudTable;
 
-
-const CrudTableRows: FC<{ data: Array<any>, headerData: Array<any>, renderActions: (item: any) => React.ReactNode }> = ({ data, headerData, renderActions }) => {
+type CrudTableRowsProps = {
+    data: Array<any>,
+    headerData: Array<any>,
+    renderActions: (item: any) => React.ReactNode,
+    onSelect: (datarow: any) => void
+}
+const CrudTableRows: FC<CrudTableRowsProps> = ({ data, headerData, renderActions, onSelect }) => {
     const rows = data.map((item, index) => {
 
         const renderCols = headerData.map((headerItem, headerIndex) => {
@@ -143,7 +149,7 @@ const CrudTableRows: FC<{ data: Array<any>, headerData: Array<any>, renderAction
         const grayShadowClass: string = ((index % 2) !== 0) ? "shadow-inner-fill-gray" : "";
 
         return (
-            <tr key={`tr${index}`} className={`${grayShadowClass} my-5`}>
+            <tr key={`tr${index}`} className={`${grayShadowClass} my-5 hover:cursor-pointer hover:shadow-inner-fill-gray-dark`} onClick={() => { onSelect(item) }}>
                 {renderCols}
                 {renderActions(item)}
             </tr>

@@ -30,7 +30,8 @@ export default {
         ]
       },
       boxShadow: {
-        'inner-fill-gray': 'inset 0 0 9999px #00000010'
+        'inner-fill-gray': 'inset 0 0 9999px #00000010',
+        'inner-fill-gray-dark': 'inset 0 0 9999px #00000333'
       },
       animation: {
         'spin-slow': 'spin 10s linear infinite',
