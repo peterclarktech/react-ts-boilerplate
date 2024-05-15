@@ -11,6 +11,12 @@ enum ColorGroup {
 
 export default ColorGroup;
 
+export enum DarkMode {
+    off,
+    on,
+    auto
+}
+
 type ColorSelectType = {
     bgColorClass:string, 
     titleColorClass:string, 

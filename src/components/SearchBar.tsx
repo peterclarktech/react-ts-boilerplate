@@ -33,7 +33,7 @@ const SearchBar: FC<SearchBarProps> = ({ id, placeholder, data, onFilter, filter
                 <>
                     <label htmlFor={id}><i className="bi bi-search"></i> : </label>
                     <input type="text" id={id} name="searchtxt" placeholder={placeholder}
-                        className="border border-gray-light rounded-lg py-2 px-4"
+                        className="border border-gray-light bg-white text-black rounded-lg py-2 px-4"
                         onChange={onChangeHandler} />
                 </>
             )}

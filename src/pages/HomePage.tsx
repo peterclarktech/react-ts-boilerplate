@@ -1,17 +1,22 @@
 import reactLogo from '../assets/react.svg'
 import viteLogo from '../../public/vite.svg'
 
-import { useState, version } from 'react'
+import { useContext, useState, version } from 'react'
 import PageSection from '../components/PageSection';
 import Card from '../components/Card';
 
-import useDarkMode from '../hooks/useDarkMode';
-import ColorGroup from '../utils/ColorGroup';
+import useUserDarkMode from '../hooks/useUserDarkMode';
+import ColorGroup, { DarkMode } from '../utils/ColorGroup';
 import Button, { ButtonType } from '../components/Button';
+import AppContext from '../contexts/AppContext';
 
 export default function HomePage() {
     const [count, setCount] = useState(0);
-    const isDarkMode = useDarkMode().isDarkMode;
+    const appContext = useContext(AppContext);
+    const userDarkMode = useUserDarkMode();
+
+    let isDarkMode = appContext.darkmode === DarkMode.on || 
+    (appContext.darkmode === DarkMode.auto && userDarkMode.isDarkMode);
 
     let tailwindsvgpath = isDarkMode ? "/tailwind-dark.svg" : "/tailwind.svg";
 
