@@ -21,7 +21,7 @@ const DarkModeToggle: FC<{}> = () => {
     }
 
     return (
-        <button type="button" className="hover:text-gray-light" onClick={handleClick}>
+        <button type="button" className="text-white hover:text-gray-light" onClick={handleClick}>
             <i className={iconClass}></i>
         </button>
     )
