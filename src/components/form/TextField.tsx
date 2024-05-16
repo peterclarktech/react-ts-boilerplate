@@ -11,9 +11,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     return (
         <>
             <label htmlFor={props.id}>{children}</label>
-            <input ref={ref} type={isPassword ? "password" : "text"}
+            <input {...htmlprops} ref={ref} type={isPassword ? "password" : "text"}
                 className="border border-gray-light bg-white text-black rounded-lg py-2 px-4" 
-                {...htmlprops}/>
+                />
         </>
     )
 })
