@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { ChangeEventHandler, FC, useState } from "react";
 import Loader from "./Loader";
 import TextField from "./form/TextField";
 
@@ -12,7 +12,7 @@ type SearchBarProps = {
 const SearchBar: FC<SearchBarProps> = ({ id, placeholder, data, onFilter, filterFn }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    let timeoutid: number | undefined;
+    let timeoutid: NodeJS.Timeout;
 
     const startSearching = (searchText: string) => {
         setIsLoading(true);
@@ -20,10 +20,10 @@ const SearchBar: FC<SearchBarProps> = ({ id, placeholder, data, onFilter, filter
         setIsLoading(false);
     }
 
-    const onTextChangeHandler = (value: string) => {
+    const onTextChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
         if (timeoutid) clearTimeout(timeoutid);
         timeoutid = setTimeout(() => {
-            startSearching(value)
+            startSearching(event.target.value);
         }, 1000);
     }
 

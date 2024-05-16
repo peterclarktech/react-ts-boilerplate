@@ -1,16 +1,13 @@
-import { FC, MouseEventHandler } from "react";
+import { FC } from "react";
 import ColorGroup, { ColorSelect } from "../utils/ColorGroup";
 
 export enum ButtonType {default,primary,positive,danger,disabled}
-type ButtonProps = {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: ButtonType,
-    children?: React.ReactNode,
-    onClick?: MouseEventHandler,
-    onMouseEnter?: MouseEventHandler,
-    onMouseLeave?: MouseEventHandler
+    children?: React.ReactNode
 }
 const Button: FC<ButtonProps> = (props) => {
-    const { variant=ButtonType.default, children} = props;
+    const { variant=ButtonType.default, children, ...htmlprops} = props;
 
     let colorClass = ColorSelect[ColorGroup.neutral];//ButtonType.default
     if (variant === ButtonType.primary) colorClass = ColorSelect[ColorGroup.accent];
@@ -22,7 +19,7 @@ const Button: FC<ButtonProps> = (props) => {
     return (
         <button disabled={variant === ButtonType.disabled} 
             className={`${colorClass.bgColorClass} ${colorClass.textColorClass} border border-gray-light dark:border-gray rounded-lg py-2 px-4 ${hoverClasses}`} 
-            {...props}>
+            {...htmlprops}>
                 {children}
         </button>
     )
