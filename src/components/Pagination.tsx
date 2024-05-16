@@ -25,7 +25,8 @@ const Pagination: FC<PaginationType> = ({ totalSize, pageSize = 10, onPaginate }
     return (
         <div className="flex flex-col sm:flex-row">
             <div className="float-left content-center flex-none">
-                <span>{`Showing ${startIndex + 1}-${endIndex + 1} out of ${totalSize} rows`}</span>
+                {totalSize > 0 && <span>{`Showing ${startIndex + 1}-${endIndex + 1} out of ${totalSize} rows`}</span>}
+                {totalSize < 1 && <span>No records found...</span>}
             </div>
             <div className="flex-1">
                 {maxPage > 1 && (
