@@ -35,7 +35,7 @@ const CrudTable: FC<CrudTableProps> = (props) => {
         pagination = { pageSize: 10 }, onSelect = () => { } } = props;
 
     const [filteredData, setFilteredData] = useState<typeof listData>(props.listData);
-    const [pagedData, setPagedData] = useState<typeof listData>(filteredData.slice(0, pagination.pageSize - 1));
+    const [pagedData, setPagedData] = useState<typeof listData>([]);
 
     const searchableHeaders = new Array<string>;
     const renderHeaders = useMemo(() => headerData.map((item, index) => {
