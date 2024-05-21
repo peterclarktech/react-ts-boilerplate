@@ -1,4 +1,4 @@
-import { Await, useAsyncValue, useLoaderData } from "react-router-dom";
+import { Await, useAsyncValue, useLoaderData, useNavigate } from "react-router-dom";
 import { Suspense } from "react";
 
 import Loader from "../../components/Loader";
@@ -20,6 +20,7 @@ export default function UserListPage() {
 
 const UserTable = () => {
     const loadData = useAsyncValue() as any;
+    const navigate = useNavigate();
     const onEdit = (data: any) => {
         alert(`${data.username} - EDIT TODO!`);
     }
@@ -29,7 +30,7 @@ const UserTable = () => {
     }
 
     const onAdd = () => {
-        alert('ADD TODO!');
+        navigate("add")
     }
 
     const onUserSelect = (data: any) => {

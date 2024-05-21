@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import Button, { ButtonType } from "./Button";
 import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
@@ -35,10 +35,10 @@ const CrudTable: FC<CrudTableProps> = (props) => {
         pagination = { pageSize: 10 }, onSelect = () => { } } = props;
 
     const [filteredData, setFilteredData] = useState<typeof listData>(props.listData);
-    const [pagedData, setPagedData] = useState<typeof listData>(new Array<any>);
+    const [pagedData, setPagedData] = useState<typeof listData>(filteredData.slice(0, pagination.pageSize - 1));
 
     const searchableHeaders = new Array<string>;
-    const renderHeaders = headerData.map((item, index) => {
+    const renderHeaders = useMemo(() => headerData.map((item, index) => {
         const { canHide = false, isSearchable = true } = item;
         const headerName: string = item.headerText ? item.headerText : item.dataField
         const hiddenClass: string = canHide ? "hidden md:table-cell" : "";
@@ -48,22 +48,21 @@ const CrudTable: FC<CrudTableProps> = (props) => {
         return (
             <th key={`${tblKey}_th${index}`} className={`p-5 text-left ${hiddenClass}`}>{headerName}</th>
         )
-    });
+    }), [headerData]);
 
     const onFilter = (data: typeof listData) => {
         setFilteredData(data);
     }
 
-    const filterFn = (data: typeof listData, searchTxt: string) => {
-        return data.filter((row) => {
+    const filterFn = useCallback((searchTxt: string) =>
+        listData.filter((row) => {
             let result: boolean = false;
             for (let searchHeader of searchableHeaders) {
                 result = (row[searchHeader] as string).toUpperCase().includes(searchTxt.toUpperCase());
                 if (result) break;
             }
             return result;
-        });
-    }
+        }), [listData]);
 
     const paginationHandler = (startIndex: number, endIndex: number) => {
         setPagedData(filteredData.slice(startIndex, endIndex + 1));
@@ -92,7 +91,7 @@ const CrudTable: FC<CrudTableProps> = (props) => {
                     {children}
                     <div className="my-5">
                         <div className="float-left">
-                            <SearchBar id="searchusersbar" placeholder="Search users" data={listData} filterFn={filterFn} onFilter={onFilter} />
+                            <SearchBar id="searchusersbar" placeholder="Search users" filterFn={filterFn} onFilter={onFilter} />
                         </div>
                         {enableAdd &&
                             (<div className="float-right">
@@ -142,14 +141,17 @@ const CrudTableRows: FC<CrudTableRowsProps> = ({ data, headerData, renderActions
 
             const hiddenClass: string = canHide ? "hidden md:table-cell" : "";
             return (
-                <td key={`row${index}col${headerIndex}`} className={`p-5 ${hiddenClass}`}>{renderContent}</td>
+                <td key={`row${index}col${headerIndex}`} className={`p-5 ${hiddenClass}`}
+                    onClick={() => { onSelect(item) }}>
+                    {renderContent}
+                </td>
             )
         });
 
         const grayShadowClass: string = ((index % 2) !== 0) ? "shadow-inner-fill-gray" : "";
 
         return (
-            <tr key={`tr${index}`} className={`${grayShadowClass} my-5 hover:cursor-pointer hover:shadow-inner-fill-gray-dark`} onClick={() => { onSelect(item) }}>
+            <tr key={`tr${index}`} className={`${grayShadowClass} my-5 hover:cursor-pointer hover:shadow-inner-fill-gray-dark`}>
                 {renderCols}
                 {renderActions(item)}
             </tr>

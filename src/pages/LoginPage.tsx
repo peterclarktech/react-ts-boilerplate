@@ -19,7 +19,7 @@ const LoginPage: React.FC<{}> = () => {
         //note: below is just a sample code to simulate login, 
         //replace with server login code for real applications
         appContext.setUser({ username: usernameRef.current?.value!, firstname: usernameRef.current?.value! });
-        navigate("/crudsample");
+        navigate("/crudsample/users");
     };
 
     const handleKeyDown: KeyboardEventHandler = (event) => {
@@ -31,30 +31,27 @@ const LoginPage: React.FC<{}> = () => {
     return (
         <div className='flex-1'>
             <PageSection hasBottomBorder={false}>
-                {/* TODO: add form component */}
                 <Panel colorGroup={ColorGroup.accent}>
-                    <div className="text-center">
-                        <h1 className="mb-2 text-5xl font-bold">Welcome to React Boilerplate!</h1>
-                        <h1 className="mb-14 text-2xl">Please login to proceed</h1>
+                        <h1 className="text-center mb-2 text-5xl font-bold">Welcome to React Boilerplate!</h1>
+                        <h1 className="text-center mb-14 text-2xl">Please login to proceed</h1>
                         <div className="mb-5">
                             <TextField
                                 ref={usernameRef}
                                 id="username"
-                                placeholder="Username" 
-                                onKeyDown={handleKeyDown}/>
+                                placeholder="Username/email" 
+                                onKeyDown={handleKeyDown}>Username</TextField>
                         </div>
                         <div className="mb-5">
                             <TextField
                                 id="password"
                                 isPassword
                                 ref={passwordRef}
-                                placeholder="Password" 
-                                onKeyDown={handleKeyDown}/>
+                                placeholder="********" 
+                                onKeyDown={handleKeyDown}>Password</TextField>
                         </div>
-                        <div className="mb-5">
+                        <div className="mb-5 text-center">
                             <Button variant={ButtonType.positive} onClick={handleLogin}>Login</Button>
                         </div>
-                    </div>
                 </Panel>
             </PageSection>
         </div>

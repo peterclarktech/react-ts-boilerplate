@@ -1,22 +1,18 @@
 import { ChangeEventHandler, FC, useState } from "react";
 import Loader from "./Loader";
-import TextField from "./form/TextField";
 
-type SearchBarProps = {
-    id: string,
-    placeholder?: string,
-    data: Array<any>,
+interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {
     onFilter: (filteredData: Array<any>) => void,
-    filterFn: (data: Array<any>, searchTxt: string) => Array<any>
+    filterFn: (searchTxt: string) => Array<any>
 }
-const SearchBar: FC<SearchBarProps> = ({ id, placeholder, data, onFilter, filterFn }) => {
+const SearchBar: FC<SearchBarProps> = ({ onFilter, filterFn, ...htmlProps }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     let timeoutid: NodeJS.Timeout;
 
     const startSearching = (searchText: string) => {
         setIsLoading(true);
-        onFilter(filterFn(data, searchText));
+        onFilter(filterFn(searchText));
         setIsLoading(false);
     }
 
@@ -32,9 +28,10 @@ const SearchBar: FC<SearchBarProps> = ({ id, placeholder, data, onFilter, filter
             <Loader isLoading={isLoading} loadingText="Searching Users" />
             {!isLoading && (
                 <>
-                    <TextField id={id} placeholder={placeholder} onChange={onTextChangeHandler}>
-                        <i className="bi bi-search"></i>&nbsp;:&nbsp;
-                    </TextField>
+                    <label htmlFor={htmlProps.id}><i className="bi bi-search"></i>&nbsp;:&nbsp;</label>
+                    <input {...htmlProps} 
+                        className="border border-gray-light bg-white text-black rounded-lg py-2 px-4"
+                        onChange={onTextChangeHandler}/>
                 </>
             )}
 

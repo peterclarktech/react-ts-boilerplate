@@ -15,8 +15,9 @@ const Pagination: FC<PaginationType> = ({ totalSize, pageSize = 10, onPaginate }
 
     let maxPage: number = Math.ceil(totalSize / pageSize);
 
-    useEffect(() => onPaginate(startIndex, endIndex)
-        , [startIndex, endIndex]);
+    useEffect(() => {
+        onPaginate(startIndex, endIndex);
+    }, [currentPage]);
 
     const changePage = (newPage: number) => {
         setCurrentPage(newPage);
