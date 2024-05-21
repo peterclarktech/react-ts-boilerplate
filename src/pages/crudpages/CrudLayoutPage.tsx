@@ -1,10 +1,19 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar, { NavLinkItem } from "../../components/Sidebar";
 import ColorGroup from "../../utils/ColorGroup";
+import { useContext } from "react";
+import AppContext from "../../contexts/AppContext";
 
 export default function CrudLayoutPage() {
+    const appContext = useContext(AppContext);
+    const navigate = useNavigate();
+
+    //must be logged in to access crud pages
+    if(!appContext.user || !appContext.user.username)
+        navigate("/login");
+
     const navLinks: Array<NavLinkItem> = [
-        { to: "", text: "Users" },
+        { to: "users", text: "Users" },
         { to: "userroles", text: "User Roles" }
     ];
 
